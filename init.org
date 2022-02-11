@@ -1,0 +1,144 @@
+* Package
+  #+BEGIN_SRC emacs-lisp
+    (require 'package)
+    (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+	                     ("elpa" . "https://elpa.gnu/packages/")))
+    (package-initialize)
+  #+END_SRC
+* Backup
+  #+BEGIN_SRC emacs-lisp
+    (setq make-backup-files nil
+      auto-save-default nil
+  create-lockfiles nil)
+  #+END_SRC
+* Window
+   #+BEGIN_SRC emacs-lisp
+     (setq frame-title-format nil)
+     ;; Question
+     (fset 'yes-or-no-p 'y-or-n-p)
+     (setq confirmation-kill-emacs nil)
+     ;;Give some breathing room
+     (set-fringe-mode 0)
+     (setq-default toggle-truncate-lines nil)
+      ;;(add-to-list 'default-frame-alist '(fullscreen . maximized))
+      ;;(toggle-frame-fullscreen)
+   #+END_SRC
+* Key bindings
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "M-p") 'previous-line)
+     (global-set-key (kbd "M-n") 'next-line)
+     (global-set-key (kbd "C-q") 'query-replace)
+     (global-set-key (kbd "C-c c") 'comment-line)
+   #+END_SRC
+* Startup
+   #+BEGIN_SRC emacs-lisp
+     (setq ring-bell-function 'ignore
+	   inhibit-startup-message t
+	   inhibit-splash-screen t
+	   initial-scratch-message "")
+   #+END_SRC
+* Tweacs
+     #+BEGIN_SRC emacs-lisp
+       ;; disable the toolbar
+       (tool-bar-mode -1)
+       ;; disable visible scroolbar
+       (scroll-bar-mode -1)
+       ;; batery
+       (display-battery-mode t)
+       (column-number-mode -1)
+   #+END_SRC
+* use package
+  #+BEGIN_SRC emacs-lisp
+    (require 'use-package)
+    (setq use-package-always-ensure t)
+  #+END_SRC
+* counsel, ivy and swipper  
+#+BEGIN_SRC emacs-lisp
+       (use-package ivy
+       ;;:diminish
+	 :init
+	   (ivy-mode 1)
+	   :bind(("C-s" . swiper)
+	       ("C-x b" . counsel-switch-buffer)
+	       :map ivy-minibuffer-map
+	       ("TAB" . ivy-alt-done)
+	       ("M-j" . ivy-next-line)
+	       ("M-k" . ivy-previous-line)
+	       ("C-d" . ivy-switch-buffer-kill))
+	   :custom
+	   (ivy-use-virtual-buffers t)
+	   (ivy-truncate-lines t)
+	   (ivy-wrap t)
+	   (ivy-use-selectable-prompt t)
+	   (ivy-count-format "[%d/%d]")
+	   (enable-recursive-minibuffers t))
+
+      (use-package counsel
+	 ;; :diminish
+       :after ivy
+       :bind
+       (("C-x f" . counsel-recentf))
+       :config(counsel-mode 1))
+
+  (use-package swiper
+   ;; :diminish
+   :after ivy)
+#+END_SRC
+  
+* ivy posframe
+ #+BEGIN_SRC emacs-lisp
+       (use-package ivy-posframe)
+      ;; :diminish
+       :after ivy
+       :custom
+       (ivy-posframe-width 70)
+       (ivy-posframe-height 15)
+       (ivy-posframe-border-width 2)
+       :config
+       (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
+       (ivy-posframe-mode 1)
+#+END_SRC
+
+* Ace Window
+#+BEGIN_SRC emacs-lisp
+	(use-package ace-window
+	  :bind("C-x o" . ace-window)
+	  :config
+	  (set-face-attribute
+	   'aw-leading-char-face nil
+	   :foreground "deep sky blue"
+	   :weight 'bold
+	   :height 3.0)
+	  (setq aw-keys '(?a ?s ?d ?f ?j ?k ?l))
+	  )
+
+#+END_SRC
+
+* avy
+ #+BEGIN_SRC emacs-lisp
+ (use-package avy
+   :config
+   (setq avy-keys '(?a ?b ?c ?d ?e ?f ?g ?h ?i ?j ?k ?l ?m ?n ?o ?p ?q ?r ?s ?t ?u ?v ?w ?x ?y ?z)))
+   (global-set-key (kbd "C-c m") 'avy-move-line)
+   (global-set-key (kbd "C-c b") 'avy-move-region)
+
+ #+END_SRC
+
+ 
+ #+BEGIN_SRC emacs-lisp
+  ;; (require 'use-package)
+  ;; (setq use-package-always-ensure t)
+ #+END_SRC
+
+
+
+lll  
+
+
+  
+
+
+
+
+
+
